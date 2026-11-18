@@ -137,4 +137,16 @@ class TopsisCalculationController extends Controller
         $perhitungan = Perhitungan::findOrFail($id);
         return view('topsis.show', compact('perhitungan'));
     }
+
+    /**
+     * Menghapus log riwayat perhitungan.
+     */
+    public function destroy($id)
+    {
+        $perhitungan = Perhitungan::findOrFail($id);
+        $namaSesi = $perhitungan->nama_sesi;
+        $perhitungan->delete();
+
+        return redirect()->route('topsis.index')->with('success', 'Riwayat perhitungan "' . $namaSesi . '" berhasil dihapus.');
+    }
 }
